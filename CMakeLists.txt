@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.14)
 project(catima)
 
 ############ options #############
-option(BUILD_SHARED_LIBS "build as shared library" ON)
+option(BUILD_SHARED_LIBS "build as shared library" OFF)
 option(PYTHON_MODULE "compile the Catima python module(requires numpy and cython installed)" OFF)
 option(TESTS "build tests" OFF)
 option(EXAMPLES "build examples" OFF)
