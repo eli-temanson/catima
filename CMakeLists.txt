@@ -58,12 +58,12 @@ configure_file("${PROJECT_SOURCE_DIR}/init.sh.in"
                "${PROJECT_BINARY_DIR}/init.sh")
 ############### main build ###########################
 
-file(GLOB SOURCES *.cpp)
+file(GLOB SOURCES catima/*.cpp)
 if(GLOBAL)
 file(GLOB GLOBAL_SOURCES global/*.c)
 LIST (APPEND SOURCES ${GLOBAL_SOURCES})
 endif(GLOBAL)
-file(GLOB HEADERS *.h libs/*.h)
+file(GLOB HEADERS catima/*.h libs/*.h)
 
 add_library(catima ${SOURCES})
 set_target_properties(catima PROPERTIES
@@ -151,7 +151,7 @@ add_subdirectory("bin")
 endif(APPS)
 
 ####### install part #######
-FILE(GLOB headers "*.h")
+FILE(GLOB headers "catima/*.h")
 include(GNUInstallDirs)
 include(CMakePackageConfigHelpers)
 
