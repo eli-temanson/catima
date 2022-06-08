@@ -6,7 +6,7 @@ option(BUILD_SHARED_LIBS "build as shared library" OFF)
 option(PYTHON_MODULE "compile the Catima python module(requires numpy and cython installed)" OFF)
 option(TESTS "build tests" OFF)
 option(EXAMPLES "build examples" OFF)
-option(APPS "build catima applications" ON)
+option(APPS "build catima applications" OFF)
 option(GLOBAL "build with global, sources are required" OFF)
 option(REACTIONS "enable/disable nuclear reaction rate" ON)
 option(STORE_SPLINES "store splines, if disables splines are always recreated" ON)
@@ -32,6 +32,7 @@ MESSAGE(STATUS "Build type: " ${CMAKE_BUILD_TYPE})
 ################################
 
 ######### compiler flags ###########
+set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 MESSAGE(STATUS "install prefix: " ${CMAKE_INSTALL_PREFIX})
@@ -48,29 +49,6 @@ if(GSL_INTEGRATION OR GSL_INTERPOLATION)
     MESSAGE(STATUS "GSL include dirs: " ${GSL_INCLUDE_DIRS})
     list(APPEND EXTRA_LIBS ${GSL_LIBRARIES} )
 endif()
-
-#find_package(nurex QUIET)
-#if(nurex_FOUND)
-#message(STATUS "nurex library found")
-#set(NUREX ON)
-#list(APPEND EXTRA_LIBS nurex::nurex)
-#endif(nurex_FOUND)
-
-find_package(fmt QUIET)
-function(check_fmt)
-    if(NOT fmt_FOUND)
-    message("fmt library not found, trying to dowload")
-    include(FetchContent)
-    FetchContent_Declare(
-        fmt
-        GIT_REPOSITORY https://github.com/fmtlib/fmt.git
-        GIT_TAG 8.1.1
-        )
-    set(CMAKE_POSITION_INDEPENDENT_CODE ON)
-    set(FMT_INSTALL ON)
-    FetchContent_MakeAvailable(fmt)
-    endif(NOT fmt_FOUND)
-endfunction(check_fmt)
 
 
 configure_file( "${CMAKE_CURRENT_SOURCE_DIR}/build_config.in"
