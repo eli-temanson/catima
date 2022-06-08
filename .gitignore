@@ -37,3 +37,4 @@ benchmark/*
 build/*
 global/*
 .vscode/*
+gwm_test/gwm_test
