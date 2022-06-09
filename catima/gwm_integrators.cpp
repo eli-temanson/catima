@@ -12,6 +12,7 @@ namespace catima {
         double x_step = 0.25*mat.thickness(); //g/cm^2
         double x_traversed = 0.0;
         double e_step = dedx(proj, mat, c)*x_step;
+		double A_recip = 1.0/proj.A;
 
         while(true)
         {
@@ -19,12 +20,12 @@ namespace catima {
             {
                 ++depth;
                 x_step *= 0.5;
-                e_step = dedx(proj, mat, c)*x_step;
+                e_step = dedx(proj, mat, c)*x_step*A_recip;
             }
             else if(x_step + x_traversed >= mat.thickness())
             {
                 x_step = mat.thickness() - x_traversed;
-                e_step = dedx(proj, mat, c)*x_step;
+                e_step = dedx(proj, mat, c)*x_step*A_recip;
                 e_final -= e_step;
                 proj.T = e_final;
                 return (e_in - e_final)*proj.A;
@@ -35,7 +36,7 @@ namespace catima {
             }
             else
             {
-                e_step = dedx(proj, mat, c)*x_step;
+                e_step = dedx(proj, mat, c)*x_step*A_recip;
                 e_final -= e_step;
                 proj.T = e_final;
                 x_traversed += x_step;
@@ -53,6 +54,7 @@ namespace catima {
         double x_step = 0.25*mat.thickness(); //g/cm^2
         double x_traversed = 0.0;
         double e_step = dedx(proj, mat, c)*x_step;
+		double A_recip = 1.0/proj.A;
         
         while(true)
         {
@@ -60,13 +62,13 @@ namespace catima {
             {
                 ++depth;
                 x_step *= 0.5;
-                e_step = dedx(proj, mat, c)*x_step;
+                e_step = dedx(proj, mat, c)*x_step*A_recip;
             }
             else if(x_step + x_traversed >= mat.thickness())
             {
                 x_step = mat.thickness() -  x_traversed;
                 e_step = dedx(proj, mat, c)*x_step;
-                e_initial += e_step;
+                e_initial += e_step*A_recip;
                 proj.T = e_initial;
                 return (e_initial - e_out)*proj.A;
             }
@@ -77,7 +79,7 @@ namespace catima {
             else
             {
                 e_step = dedx(proj, mat, c)*x_step;
-                e_initial += e_step;
+                e_initial += e_step*A_recip;
                 proj.T = e_initial;
                 x_traversed += x_step;
             }
