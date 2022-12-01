@@ -1,3 +1,8 @@
+/*
+ * Testing for gwm_integrators
+ *
+ * Dec 2022, Gordon McCann
+ */
 #include "catima/gwm_integrators.h"
 #include "catima/nucdata.h"
 #include <iostream>

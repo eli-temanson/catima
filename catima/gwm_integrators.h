@@ -1,3 +1,8 @@
+/*
+ * Simple energy  loss integrators for forward and reverse cases. 
+ *
+ * Dec 2022, Gordon McCann
+ */
 #ifndef GWM_INTEGRATORS_H
 #define GWM_INTEGRATORS_H
 

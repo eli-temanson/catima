@@ -1,3 +1,8 @@
+/*
+ * Simple energy  loss integrators for forward and reverse cases. 
+ *
+ * Dec 2022, Gordon McCann
+ */
 #include "catima/gwm_integrators.h"
 
 namespace catima {
@@ -33,6 +38,10 @@ namespace catima {
             else if(depth == s_depth_max)
             {
                 return e_in*proj.A;
+            }
+            else if (e_final > 0.0)
+            {
+                return e_in * proj.A; //In case an integration step takes us below 0
             }
             else
             {
