@@ -39,7 +39,7 @@ namespace catima {
             {
                 return e_in*proj.A;
             }
-            else if (e_final > 0.0)
+            else if (e_final < 0.0)
             {
                 return e_in * proj.A; //In case an integration step takes us below 0
             }
